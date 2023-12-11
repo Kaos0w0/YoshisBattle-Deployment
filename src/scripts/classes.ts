@@ -50,7 +50,7 @@ export class Nodo implements NodoInterface {
         this.mejor_mov = movimiento;
     }
 
-    getPosicion(tipo:String): coordinate {
+    getPosicion(tipo:string): coordinate {
         if(tipo == "MAX"){
             return this.pos_IA;
         }else{

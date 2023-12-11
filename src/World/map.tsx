@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-case-declarations */
 /* eslint-disable no-inner-declarations */
 import { useEffect } from 'react';
@@ -8,7 +9,7 @@ interface MapaProps {
   difficulty: 'Facil' | 'Intermedio' | 'Dificil' | undefined;
   stopAudio: () => void;
 }
-;
+
 let puntos_verde = 0;
 let puntos_rojo = 0;
 const divsConListeners: { div: HTMLElement; eventHandler: unknown; }[] = [];
@@ -325,7 +326,7 @@ function agregarClickListenerADivs(divId: string, matriz: matrix, p_monedas_norm
 
 function eliminarEventListenersDeDivs() {
   divsConListeners.forEach(({ div, eventHandler }) => {
-    div.removeEventListener('click', eventHandler);
+    div.removeEventListener('click', eventHandler as EventListener);
     div.className = '';
   });
 
