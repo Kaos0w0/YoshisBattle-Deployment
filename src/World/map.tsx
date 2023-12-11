@@ -10,6 +10,7 @@ interface MapaProps {
   stopAudio: () => void;
 }
 
+const assetsUrl = import.meta.env.VITE_APP_BASE_URL;
 let puntos_verde = 0;
 let puntos_rojo = 0;
 const divsConListeners: { div: HTMLElement; eventHandler: unknown; }[] = [];
@@ -110,14 +111,14 @@ function animar_movimiento(camino: string[], jugador: number, origen: coordinate
       case 0:
         if(divOrigen.childElementCount > 1) break;
         const image = document.createElement('img');
-        image.setAttribute('src', '../src/assets/elementos_juego/monedas/invisible2.png');
+        image.setAttribute('src', `${assetsUrl}/assets/elementos_juego/monedas/invisible2.png`);
         image.setAttribute('width', '55%');
         divOrigen.appendChild(image);
         break;
       case 1:
         if(divOrigen.childElementCount > 1) break;
         const image2 = document.createElement('img');
-        image2.setAttribute('src', '../src/assets/elementos_juego/monedas/normal.gif');
+        image2.setAttribute('src', `${assetsUrl}/assets/elementos_juego/monedas/normal.gif`);
         image2.setAttribute('width', '40%');
         image2.setAttribute('top', '50%');
         image2.setAttribute('position', 'relative');
@@ -127,7 +128,7 @@ function animar_movimiento(camino: string[], jugador: number, origen: coordinate
       case 2:
         if(divOrigen.childElementCount > 1) break;
         const image4 = document.createElement('img');
-        image4.setAttribute('src', '../src/assets/elementos_juego/monedas/especial.gif');
+        image4.setAttribute('src', `${assetsUrl}/assets/elementos_juego/monedas/especial.gif`);
         image4.setAttribute('width', '50%');
         image4.setAttribute('top', '50%');
         image4.setAttribute('position', 'relative');
@@ -141,7 +142,7 @@ function animar_movimiento(camino: string[], jugador: number, origen: coordinate
 
     switch(camino[0]){
       case 'arriba':
-        yoshi.setAttribute('src', jugador === 3 ? '../src/assets/elementos_juego/green/up/3.png' : '../src/assets/elementos_juego/red/up/3.png');
+        yoshi.setAttribute('src', jugador === 3 ? `${assetsUrl}/assets/elementos_juego/green/up/3.png` : `${assetsUrl}/assets/elementos_juego/red/up/3.png`);
         posicion_inicial_x--;
         divDestino = document.getElementById(`cell ${posicion_inicial_x}-${posicion_inicial_y}`);
         if(!divDestino){ return; }
@@ -154,7 +155,7 @@ function animar_movimiento(camino: string[], jugador: number, origen: coordinate
         divDestino?.appendChild(yoshi);
         break;
       case 'abajo':
-        yoshi.setAttribute('src', jugador === 3 ? '../src/assets/elementos_juego/green/down/3.png' : '../src/assets/elementos_juego/red/down/3.png');
+        yoshi.setAttribute('src', jugador === 3 ? `${assetsUrl}/assets/elementos_juego/green/down/3.png` : `${assetsUrl}/assets/elementos_juego/red/down/3.png`);
         posicion_inicial_x++;
         divDestino = document.getElementById(`cell ${posicion_inicial_x}-${posicion_inicial_y}`);
         if(!divDestino){ return; }
@@ -167,7 +168,7 @@ function animar_movimiento(camino: string[], jugador: number, origen: coordinate
         divDestino?.appendChild(yoshi);
         break;
       case 'derecha':
-        yoshi.setAttribute('src', jugador === 3 ? '../src/assets/elementos_juego/green/right/3.png' : '../src/assets/elementos_juego/red/right/3.png');
+        yoshi.setAttribute('src', jugador === 3 ? `${assetsUrl}/assets/elementos_juego/green/right/3.png` : `${assetsUrl}/assets/elementos_juego/red/right/3.png`);
         posicion_inicial_y++;
         divDestino = document.getElementById(`cell ${posicion_inicial_x}-${posicion_inicial_y}`);
         if(!divDestino){ return; }
@@ -180,7 +181,7 @@ function animar_movimiento(camino: string[], jugador: number, origen: coordinate
         divDestino?.appendChild(yoshi);
         break;
       case 'izquierda':
-        yoshi.setAttribute('src', jugador === 3 ? '../src/assets/elementos_juego/green/left/3.png' : '../src/assets/elementos_juego/red/left/3.png');
+        yoshi.setAttribute('src', jugador === 3 ? `${assetsUrl}/assets/elementos_juego/green/left/3.png` : `${assetsUrl}/assets/elementos_juego/red/left/3.png`);
         posicion_inicial_y--;
         divDestino = document.getElementById(`cell ${posicion_inicial_x}-${posicion_inicial_y}`);
         if(!divDestino){ return; }
@@ -198,9 +199,9 @@ function animar_movimiento(camino: string[], jugador: number, origen: coordinate
         const hijoDivDestino = divDestino?.firstChild;
         hijoDivDestino ? divDestino?.removeChild(hijoDivDestino) : null;
         if(posicion_inicial_y < 4){
-          yoshi.setAttribute('src', jugador === 3 ? '../src/assets/elementos_juego/green/idle/1.png' : '../src/assets/elementos_juego/red/idle/1.png');
+          yoshi.setAttribute('src', jugador === 3 ? `${assetsUrl}/assets/elementos_juego/green/idle/1.png` : `${assetsUrl}/assets/elementos_juego/red/idle/1.png`);
         } else {
-          yoshi.setAttribute('src', jugador === 3 ? '../src/assets/elementos_juego/green/idle/2.png' : '../src/assets/elementos_juego/red/idle/2.png');
+          yoshi.setAttribute('src', jugador === 3 ? `${assetsUrl}/assets/elementos_juego/green/idle/2.png` : `${assetsUrl}/assets/elementos_juego/red/idle/2.png`);
         }
       }
       camino.shift();
@@ -218,13 +219,13 @@ function actualizar_matriz(matriz: matrix, p_jugadores: coordinates, p_monedas_n
   animar_movimiento(calcular_ruta_en_l(p_jugadores[p_jugador], mejor_jugada, jugador, matriz), jugador, p_jugadores[p_jugador], matriz);
   matriz[mejor_jugada[0]][mejor_jugada[1]] = jugador;
   if (indiceMoneda !== -1) {
-    const sonidoMoneda = new Audio('../src/assets/elementos_juego/sonidos/coin.wav');
+    const sonidoMoneda = new Audio(`${assetsUrl}/assets/elementos_juego/sonidos/coin.wav`);
     setTimeout(() => { sonidoMoneda.play() }, 1800);
     jugador === 3 ? puntos_verde++ : puntos_rojo++;
     p_monedas_normales.splice(indiceMoneda, 1);
     matriz[mejor_jugada[0]][mejor_jugada[1]] = 5;
   } else if (indiceMonedaEspecial !== -1) {
-    const sonidoMoneda = new Audio('../src/assets/elementos_juego/sonidos/ecoin.wav');
+    const sonidoMoneda = new Audio(`${assetsUrl}/assets/elementos_juego/sonidos/ecoin.wav`);
     setTimeout(() => { sonidoMoneda.play() }, 1800);
     jugador === 3 ? puntos_verde += 3 : puntos_rojo += 3;
     p_monedas_especiales.splice(indiceMonedaEspecial, 1);
@@ -246,17 +247,17 @@ function juegoTerminado(p_monedas_normales: coordinates, p_monedas_especiales: c
   if (noHayMonedas(p_monedas_normales, p_monedas_especiales)) {
     if(puntos_verde > puntos_rojo){
       setTimeout(() => { document.getElementById('turno') ? document.getElementById('turno')!.innerHTML = '¡GANA VERDE!' : null; }, 1000);
-      const sonidoVictoria = new Audio('../src/assets/elementos_juego/sonidos/iawin.wav');
+      const sonidoVictoria = new Audio(`${assetsUrl}/assets/elementos_juego/sonidos/iawin.wav`);
       _callback ? _callback() : null;
       sonidoVictoria.play();
     } else if(puntos_verde < puntos_rojo){
       setTimeout(() => { document.getElementById('turno') ? document.getElementById('turno')!.innerHTML = '¡GANA ROJO!' : null; }, 1000);
-      const sonidoVictoria = new Audio('../src/assets/elementos_juego/sonidos/pjwin.wav');
+      const sonidoVictoria = new Audio(`${assetsUrl}/assets/elementos_juego/sonidos/pjwin.wav`);
       _callback ? _callback() : null;
       sonidoVictoria.play();
     } else {
       setTimeout(() => { document.getElementById('turno') ? document.getElementById('turno')!.innerHTML = '¡EMPATE!' : null; }, 1000);
-      const sonidoEmpate = new Audio('../src/assets/elementos_juego/sonidos/empate.wav');
+      const sonidoEmpate = new Audio(`${assetsUrl}/assets/elementos_juego/sonidos/empate.wav`);
       _callback ? _callback() : null;
       sonidoEmpate.play();
     }
@@ -388,14 +389,14 @@ const Map: React.FC<MapaProps> = ({ difficulty, stopAudio }) => {
           div.style.width = '12.5%';
           if (matriz_juego[i][j] === 0) {
             const image = document.createElement('img');
-            image.setAttribute('src', '../src/assets/elementos_juego/monedas/invisible2.png');
+            image.setAttribute('src', `${assetsUrl}/assets/elementos_juego/monedas/invisible2.png`);
             image.setAttribute('width', '55%');
             image.setAttribute('position', 'relative');
             image.setAttribute('z-index', '0');
             div.appendChild(image);
           } else if (matriz_juego[i][j] === 1) {
             const image = document.createElement('img');
-            image.setAttribute('src', '../src/assets/elementos_juego/monedas/normal.gif');
+            image.setAttribute('src', `${assetsUrl}/assets/elementos_juego/monedas/normal.gif`);
             image.setAttribute('width', '40%');
             image.setAttribute('top', '50%');
             image.setAttribute('position', 'relative');
@@ -403,7 +404,7 @@ const Map: React.FC<MapaProps> = ({ difficulty, stopAudio }) => {
             div.appendChild(image);
           } else if (matriz_juego[i][j] === 2) {
             const image = document.createElement('img');
-            image.setAttribute('src', '../src/assets/elementos_juego/monedas/especial.gif');
+            image.setAttribute('src', `${assetsUrl}/assets/elementos_juego/monedas/especial.gif`);
             image.setAttribute('width', '50%');
             image.setAttribute('top', '50%');
             image.setAttribute('position', 'relative');
@@ -413,9 +414,9 @@ const Map: React.FC<MapaProps> = ({ difficulty, stopAudio }) => {
           } else if (matriz_juego[i][j] === 3) {
             const image = document.createElement('img');
             if (j < 4) {
-              image.setAttribute('src', '../src/assets/elementos_juego/green/idle/1.png');
+              image.setAttribute('src', `${assetsUrl}/assets/elementos_juego/green/idle/1.png`);
             } else {
-              image.setAttribute('src', '../src/assets/elementos_juego/green/idle/2.png');
+              image.setAttribute('src', `${assetsUrl}/assets/elementos_juego/green/idle/2.png`);
             }
             image.setAttribute('width', '60%');
             image.setAttribute('height', 'auto');
@@ -428,9 +429,9 @@ const Map: React.FC<MapaProps> = ({ difficulty, stopAudio }) => {
           } else if (matriz_juego[i][j] === 4) {
             const image = document.createElement('img');
             if (j < 4) {
-              image.setAttribute('src', '../src/assets/elementos_juego/red/idle/1.png');
+              image.setAttribute('src', `${assetsUrl}/assets/elementos_juego/red/idle/1.png`);
             } else {
-              image.setAttribute('src', '../src/assets/elementos_juego/red/idle/2.png');
+              image.setAttribute('src', `${assetsUrl}/assets/elementos_juego/red/idle/2.png`);
             }
             image.setAttribute('width', '60%');
             image.setAttribute('height', 'auto');
