@@ -9,3 +9,6 @@ Que instalará automáticamente las dependencias necesarias para su funcionamien
 npm run dev
 ```
 Lo que abrirá el proyecto en uno de los puertos de su navegador, como el 5173, siga el enlace generado por la terminal.
+
+Si quiere usar el proyecto en producción, diríjase al enlace:
+https://yoshis-battle.vercel.app
