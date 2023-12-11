@@ -112,6 +112,7 @@ export function minimax(matrix: matrix, p_monedas: coordinates, p_monedas_especi
                         continue;
                     } else {
                         const movs = posiblesMovientos(nodo.getPosicion(nodo.getTipo()), matrix)
+                        movs.sort(() => Math.random() - 0.5);
                         for (const mov of movs) {
                             if(matrix[mov[0]][mov[1]] == 5) continue;
                             indice++;
