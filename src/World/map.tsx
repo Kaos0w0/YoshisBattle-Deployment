@@ -112,7 +112,7 @@ function animar_movimiento(camino: string[], jugador: number, origen: coordinate
         if(divOrigen.childElementCount > 1) break;
         const image = document.createElement('img');
         image.setAttribute('src', `${assetsUrl}/assets/elementos_juego/monedas/invisible2.png`);
-        image.setAttribute('width', '55%');
+        image.setAttribute('width', '40%');
         divOrigen.appendChild(image);
         break;
       case 1:
@@ -390,7 +390,7 @@ const Map: React.FC<MapaProps> = ({ difficulty, stopAudio }) => {
           if (matriz_juego[i][j] === 0) {
             const image = document.createElement('img');
             image.setAttribute('src', `${assetsUrl}/assets/elementos_juego/monedas/invisible2.png`);
-            image.setAttribute('width', '55%');
+            image.setAttribute('width', '40%');
             image.setAttribute('position', 'relative');
             image.setAttribute('z-index', '0');
             div.appendChild(image);
