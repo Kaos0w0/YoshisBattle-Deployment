@@ -53,7 +53,7 @@ export function heuristica(n_puntosIA: number, n_puntosJugador: number, movimien
         if(matriz[movimientos[j][0]][movimientos[j][1]] == 5) continue;
         for (let i = 0; i < p_monedas.length; i++) {
             if (movimientos[j][0] === p_monedas[i][0] && movimientos[j][1] === p_monedas[i][1]) {
-                posiblesMonedas += 0.5;
+                posiblesMonedas += 0.3;
             }
         }
     }
